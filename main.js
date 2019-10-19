@@ -1,4 +1,6 @@
 const puppeteer = require('puppeteer');
+const axios = require('axios');
+require('dotenv').config();
 
 (async () => {
   const browser = await puppeteer.launch({ devtools: true })
@@ -21,7 +23,15 @@ const puppeteer = require('puppeteer');
 
   await page.waitFor('#personalDetails')
 
+  await page.click('.member-nav .navbar-toggle')
   await page.click('a[href="/bookClasses"]')
+
+  await page.waitFor('.classespadding')
+
+  await axios.post(`https://api.telegram.org/bot${process.env.TOKEN_ID}/sendMessage`, {
+    chat_id: process.env.CHAT_ID,
+    text: 'Gimnasio reservado'
+  })
 
   await browser.close()
 })()

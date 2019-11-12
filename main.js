@@ -1,6 +1,5 @@
 const puppeteer = require('puppeteer');
 const axios = require('axios');
-const getDay = require('date-fns/getDay');
 
 require('dotenv').config();
 

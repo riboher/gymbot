@@ -4,7 +4,7 @@ const axios = require('axios');
 require('dotenv').config();
 
 (async () => {
-  const browser = await puppeteer.launch()
+  const browser = await puppeteer.launch({ headless: false })
   const page = await browser.newPage()
 
   await page.goto('https://www.vivagym.es/login', { waitUntil: 'networkidle2' }),
@@ -38,7 +38,7 @@ require('dotenv').config();
     classTime,
     isClassAvailable
   } = await page.evaluate(() => {
-    const classSlotSelector = '.classespadding .panel-body > .row > div:nth-child(14) > .au-target'
+    const classSlotSelector = '.classespadding .panel-body > .row > div:nth-child(13) > .au-target'
     const node = document.querySelector(classSlotSelector)
     const className = node.childNodes[0].textContent
     const classTime = node.childNodes[1].textContent
